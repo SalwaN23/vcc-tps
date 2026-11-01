@@ -1,0 +1,19 @@
+39a87aff-b6eb-4281-ae30-5987d6117b7b
+
+7c24dd1a-68b7-4271-9222-c1038d0064f3
+
+ Interface   Type      Source    Model    MAC
+-------------------------------------------------------------
+ vnet5       network   default   virtio   52:54:00:b3:06:40
+
+ Interface   Type      Source    Model    MAC
+-------------------------------------------------------------
+ vnet6       network   default   virtio   52:54:00:66:ce:38
+
+virtual size: 15 GiB (16106127360 bytes)
+disk size: 4.69 GiB
+    disk size: 4.69 GiB
+virtual size: 15 GiB (16106127360 bytes)
+disk size: 4.69 GiB
+    disk size: 4.69 GiB
+/var/lib/libvirt/images/ubuntu-template-v1.qcow2: OK

@@ -1,0 +1,53 @@
+Formatting 'disque-raw.img', fmt=raw size=5368709120
+Formatting 'disque-qcow2.qcow2', fmt=qcow2 cluster_size=65536 extended_l2=off compression_type=zlib size=5368709120 lazy_refcounts=off refcount_bits=16
+image: disque-raw.img
+file format: raw
+virtual size: 5 GiB (5368709120 bytes)
+disk size: 4 KiB
+Child node '/file':
+    filename: disque-raw.img
+    protocol type: file
+    file length: 5 GiB (5368709120 bytes)
+    disk size: 4 KiB
+image: disque-qcow2.qcow2
+file format: qcow2
+virtual size: 5 GiB (5368709120 bytes)
+disk size: 196 KiB
+cluster_size: 65536
+Format specific information:
+    compat: 1.1
+    compression type: zlib
+    lazy refcounts: false
+    refcount bits: 16
+    corrupt: false
+    extended l2: false
+Child node '/file':
+    filename: disque-qcow2.qcow2
+    protocol type: file
+    file length: 192 KiB (197120 bytes)
+    disk size: 196 KiB
+-rw-r--r-- 1 user user 193K Nov  1 00:41 disque-converti.qcow2
+-rw-r--r-- 1 user user 193K Nov  1 00:47 disque-qcow2.qcow2
+-rw-r--r-- 1 user user 5.0G Nov  1 00:47 disque-raw.img
+196K	disque-converti.qcow2
+196K	disque-qcow2.qcow2
+4.0K	disque-raw.img
+    (0.00/100%)    (100.00/100%)    (100.00/100%)
+image: disque-converti.qcow2
+file format: qcow2
+virtual size: 5 GiB (5368709120 bytes)
+disk size: 196 KiB
+cluster_size: 65536
+Format specific information:
+    compat: 1.1
+    compression type: zlib
+    lazy refcounts: false
+    refcount bits: 16
+    corrupt: false
+    extended l2: false
+Child node '/file':
+    filename: disque-converti.qcow2
+    protocol type: file
+    file length: 192 KiB (197120 bytes)
+    disk size: 196 KiB
+Images are identical.

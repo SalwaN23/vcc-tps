@@ -107,3 +107,15 @@
 ## 11. Conclusion personnelle
 
 Je choisis un clone quand... un template quand... une image quand...
+
+![01-parties-A-a-D](captures/01-parties-A-a-D.png)
+
+![02-historique-commandes](captures/02-historique-commandes.png)
+
+![04b-ssh-restore](captures/04b-ssh-restore.png)
+
+![04-restore-boot](captures/04-restore-boot.png)
+
+![05-cloud-init](captures/05-cloud-init.png)
+
+![10-formats](captures/10-formats.png)

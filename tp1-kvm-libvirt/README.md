@@ -42,6 +42,8 @@
 
 **Test d'indépendance des disques :** ...
 
+**Limite :** les valeurs internes de vm02 (nom d'hôte, machine-id, empreinte SSH) n'ont pas été relevées, faute de temps et à cause d'un conflit DHCP (voir section 10). Le clone étant une copie du disque de vm01, on s'attend à retrouver les mêmes valeurs que la source (nom d'hôte ubuntu, machine-id 7870776b..., même empreinte SSH). Cela n'a pas été observé sur vm02. Ce que l'on a mesuré : UUID et MAC différents, disque sans backing file. Le même phénomène d'identités copiées a été observé sur ubuntu-restore02, copie de vm01 (machine-id et empreinte SSH identiques à la source).
+
 ## 5. Image d'OS et réimportation (Partie D)
 
 **Fiche d'image :** distribution, version, architecture, format, capacité virtuelle, somme de contrôle, statut (capture non généralisée), procédure de réimportation.

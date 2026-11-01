@@ -1,0 +1,3 @@
+No errors were found on the image.
+71914/245760 = 29.26% allocated, 0.00% fragmented, 0.00% compressed clusters
+Image end offset: 4714463232

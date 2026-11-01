@@ -1,0 +1,4 @@
+ Interface   Type      Source    Model    MAC
+-------------------------------------------------------------
+ -           network   default   virtio   52:54:00:c3:8e:55
+

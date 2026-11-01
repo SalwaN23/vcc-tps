@@ -1,0 +1,5 @@
+ Target   Source
+-----------------------------------------------------
+ vda      /var/lib/libvirt/images/ubuntu-vm01.qcow2
+ sda      -
+

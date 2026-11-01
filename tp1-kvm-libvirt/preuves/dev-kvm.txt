@@ -1,0 +1,1 @@
+crw-rw----+ 1 root kvm 10, 232 Oct 31 17:58 /dev/kvm

@@ -1,0 +1,5 @@
+/usr/bin/virt-install
+/usr/bin/virt-clone
+/usr/bin/qemu-img
+/usr/bin/virt-sysprep
+/usr/bin/genisoimage

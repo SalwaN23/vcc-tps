@@ -1,0 +1,6 @@
+ Id   Name               State
+-----------------------------------
+ -    ubuntu-restore01   shut off
+ -    ubuntu-vm01        shut off
+ -    ubuntu-vm02        shut off
+

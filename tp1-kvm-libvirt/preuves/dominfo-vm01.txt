@@ -1,0 +1,15 @@
+Id:             -
+Name:           ubuntu-vm01
+UUID:           7870776b-b5ee-4286-8f79-96f72433333c
+OS Type:        hvm
+State:          shut off
+CPU(s):         2
+Max memory:     2097152 KiB
+Used memory:    2097152 KiB
+Persistent:     yes
+Autostart:      disable
+Autostart Once: disable
+Managed save:   no
+Security model: apparmor
+Security DOI:   0
+

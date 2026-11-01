@@ -1,0 +1,102 @@
+   45  sudo apt install -y qemu-system-x86 libvirt-daemon-system libvirt-clients virtinst virt-manager virt-viewer qemu-utils libguestfs-tools genisoimage
+   50  sudo virsh -c qemu:///system list --all
+   63  sudo virsh console ubuntu-vm01
+   64  sudo virsh list --all
+   68  sudo virsh start ubuntu-vm01
+   69  sudo virsh qemu-agent-command ubuntu-vm01 '{"execute": "guest-ping"}'
+   70  sudo virsh shutdown ubuntu-vm01
+   71  sudo virt-clone --original ubuntuvm01 --name ubuntuvm02 --auto-clone
+   72  sudo virt-clone --original ubuntu-vm01 --name ubuntu-vm02 --auto-clone
+   73  sudo virsh snapshot-create-as --domain ubuntu-vm01 --name "snapshot-propre" --description "Etat initial apres installation"
+   74  sudo virsh snapshot-list ubuntu-vm01
+   75  sudo virsh snapshot-info ubuntu-vm01 --snapshotname snapshot-propre
+   76  sudo virsh snapshot-revert ubuntu-vm01 --snapshotname snapshot-propre
+   79  sudo qemu-img convert -p -f qcow2 -O qcow2 "$CAPTURE" "$IMGDIR/$RESTORE.qcow2"
+   89  sudo qemu-img convert -p -f qcow2 -O qcow2 "$CAPTURE" "$IMGDIR/$RESTORE.qcow2"
+   99  sudo virsh -c qemu:///system shutdown "$VM"
+  100  sudo virsh -c qemu:///system domstate "$VM"
+  101  sudo qemu-img convert -p -f qcow2 -O qcow2 "$DISK" "$CAPTURE"
+  102  sudo qemu-img convert -p -f qcow2 -O qcow2 "$CAPTURE" "$IMGDIR/$RESTORE.qcow2"
+  103  sudo virt-install   --connect qemu:///system   --name "$RESTORE"   --memory 2048   --vcpus 2   --import   --disk path="$IMGDIR/$RESTORE.qcow2",format=qcow2,bus=virtio   --network network=default,model=virtio   --channel unix,target_type=virtio,name=org.qemu.guest_agent.0   --os-variant "$OSVAR"   --graphics vnc,listen=127.0.0.1   --noautoconsole
+  104  sudo virsh -c qemu:///system domstate ubuntu-restore01
+  105  sudo virsh -c qemu:///system resume df -h /
+  106  sudo virsh -c qemu:///system list --all
+  107  sudo qemu-img check -f qcow2 /var/lib/libvirt/images/ubuntu-vm01.qcow2
+  116  sudo virsh -c qemu:///system domstate ubuntu-vm01
+  117  sudo qemu-img check -f qcow2 /var/lib/libvirt/images/ubuntu-vm01.qcow2
+  118  qemu-img check 
+  119  sudo qemu-img check -f qcow2 /var/lib/libvirt/images/ubuntu-vm01.qcow2
+  120  sudo virsh -c qemu:///system domstate ubuntu-vm01
+  131  sudo virsh -c qemu:///system start "$VM"
+  132  dpkg -l cloud-init qemu-guest-agent openssh-server | grep ^ii
+  140  sudo rm -f /etc/cloud/cloud-init.disabled
+  141  cloud-init --version
+  144  sudo touch /etc/cloud/cloud-init.disabled
+  153  sudo rm -f /etc/cloud/cloud-init.disabled
+  154  sudo cloud-init clean --logs && sudo poweroff
+  155  sudo cloud-init clean --logs && sudo systemctl poweroff -i
+  166  mkdir -p ~/vcc-tps/tp2-cloud-init
+  222  | TP2 | **VM customization and automation with cloud-init**: NoCloud seed ISO, users and SSH keys, network configuration, packages and files, reusable profiles, Jinja2 generation from a YAML inventory, multi-VM mini-project (web, database, admin) | `tp2-cloud-init/` | Not started |
+  225  - Checking KVM support and managing VMs with `virsh`, `virt-install`, `virt-clone`
+  227  - Disk images and conversion with `qemu-img` (RAW / QCOW2, checksums, re-import)
+  228  - Generalizing a template with `virt-sysprep`
+  233  - Diagnosing cloud-init (`cloud-init status`, `analyze`, logs, `schema`)
+  236  - Guests: Ubuntu images compatible with cloud-init
+  255  *À compléter : commande `virt-install` utilisée, captures de l'installation, sorties de `dominfo`, `domblklist`, `domiflist`.*
+  278  **Fiche template-v1 :** OS, logiciels communs, nettoyage effectué (`virt-sysprep`), comptes conservés, somme de contrôle.
+  287  | instance-id cloud-init | | | |
+  291  *À compléter : sorties de `qemu-img info`, `ls -lh`, `du -h`, `qemu-img compare`.*
+  314  [200~sudo virsh -c qemu:///system list --all~
+  315  sudo virsh -c qemu:///system list --all
+export V="virsh -c qemu:///system"
+  327  sudo virsh -c qemu:///system list --all
+  375  sudo apt install -y qemu-system-x86 libvirt-daemon-system libvirt-clients virtinst virt-manager virt-viewer qemu-utils libguestfs-tools genisoimage
+  380  sudo virsh -c qemu:///system list --all
+  393  sudo virsh console ubuntu-vm01
+  394  sudo virsh list --all
+  398  sudo virsh start ubuntu-vm01
+  399  sudo virsh qemu-agent-command ubuntu-vm01 '{"execute": "guest-ping"}'
+  400  sudo virsh shutdown ubuntu-vm01
+  401  sudo virt-clone --original ubuntuvm01 --name ubuntuvm02 --auto-clone
+  402  sudo virt-clone --original ubuntu-vm01 --name ubuntu-vm02 --auto-clone
+  403  sudo virsh snapshot-create-as --domain ubuntu-vm01 --name "snapshot-propre" --description "Etat initial apres installation"
+  404  sudo virsh snapshot-list ubuntu-vm01
+  405  sudo virsh snapshot-info ubuntu-vm01 --snapshotname snapshot-propre
+  406  sudo virsh snapshot-revert ubuntu-vm01 --snapshotname snapshot-propre
+  409  sudo qemu-img convert -p -f qcow2 -O qcow2 "$CAPTURE" "$IMGDIR/$RESTORE.qcow2"
+  419  sudo qemu-img convert -p -f qcow2 -O qcow2 "$CAPTURE" "$IMGDIR/$RESTORE.qcow2"
+  429  sudo virsh -c qemu:///system shutdown "$VM"
+  430  sudo virsh -c qemu:///system domstate "$VM"
+  431  sudo qemu-img convert -p -f qcow2 -O qcow2 "$DISK" "$CAPTURE"
+  432  sudo qemu-img convert -p -f qcow2 -O qcow2 "$CAPTURE" "$IMGDIR/$RESTORE.qcow2"
+  433  sudo virt-install   --connect qemu:///system   --name "$RESTORE"   --memory 2048   --vcpus 2   --import   --disk path="$IMGDIR/$RESTORE.qcow2",format=qcow2,bus=virtio   --network network=default,model=virtio   --channel unix,target_type=virtio,name=org.qemu.guest_agent.0   --os-variant "$OSVAR"   --graphics vnc,listen=127.0.0.1   --noautoconsole
+  434  sudo virsh -c qemu:///system domstate ubuntu-restore01
+  435  sudo virsh -c qemu:///system resume df -h /
+  436  sudo virsh -c qemu:///system list --all
+  437  sudo qemu-img check -f qcow2 /var/lib/libvirt/images/ubuntu-vm01.qcow2
+  446  sudo virsh -c qemu:///system domstate ubuntu-vm01
+  447  sudo qemu-img check -f qcow2 /var/lib/libvirt/images/ubuntu-vm01.qcow2
+  448  qemu-img check 
+  449  sudo qemu-img check -f qcow2 /var/lib/libvirt/images/ubuntu-vm01.qcow2
+  450  sudo virsh -c qemu:///system domstate ubuntu-vm01
+  461  sudo virsh -c qemu:///system start "$VM"
+  462  dpkg -l cloud-init qemu-guest-agent openssh-server | grep ^ii
+  470  sudo rm -f /etc/cloud/cloud-init.disabled
+  471  cloud-init --version
+  474  sudo touch /etc/cloud/cloud-init.disabled
+  483  sudo rm -f /etc/cloud/cloud-init.disabled
+  484  sudo cloud-init clean --logs && sudo poweroff
+  485  sudo cloud-init clean --logs && sudo systemctl poweroff -i
+  496  mkdir -p ~/vcc-tps/tp2-cloud-init
+  552  | TP2 | **VM customization and automation with cloud-init**: NoCloud seed ISO, users and SSH keys, network configuration, packages and files, reusable profiles, Jinja2 generation from a YAML inventory, multi-VM mini-project (web, database, admin) | `tp2-cloud-init/` | Not started |
+  555  - Checking KVM support and managing VMs with `virsh`, `virt-install`, `virt-clone`
+  557  - Disk images and conversion with `qemu-img` (RAW / QCOW2, checksums, re-import)
+  558  - Generalizing a template with `virt-sysprep`
+  563  - Diagnosing cloud-init (`cloud-init status`, `analyze`, logs, `schema`)
+  566  - Guests: Ubuntu images compatible with cloud-init
+  585  *À compléter : commande `virt-install` utilisée, captures de l'installation, sorties de `dominfo`, `domblklist`, `domiflist`.*
+  608  **Fiche template-v1 :** OS, logiciels communs, nettoyage effectué (`virt-sysprep`), comptes conservés, somme de contrôle.
+  617  | instance-id cloud-init | | | |
+  621  *À compléter : sorties de `qemu-img info`, `ls -lh`, `du -h`, `qemu-img compare`.*
+  640  history | grep -E 'virt-install|virt-clone|virsh|qemu-img|virt-sysprep|cloud-init|genisoimage|sha256sum' | tail -60
+  641  history | grep -E 'virt-install|virt-clone|virsh|qemu-img|virt-sysprep|cloud-init|genisoimage|sha256sum' | tee ~/vcc-tps/tp1-kvm-libvirt/preuves/historique-commandes.txt

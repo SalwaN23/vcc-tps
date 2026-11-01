@@ -1,0 +1,17 @@
+image: /var/lib/libvirt/images/ubuntu-os-capture-v2.qcow2
+file format: qcow2
+virtual size: 15 GiB (16106127360 bytes)
+disk size: 4.69 GiB
+cluster_size: 65536
+Format specific information:
+    compat: 1.1
+    compression type: zlib
+    lazy refcounts: false
+    refcount bits: 16
+    corrupt: false
+    extended l2: false
+Child node '/file':
+    filename: /var/lib/libvirt/images/ubuntu-os-capture-v2.qcow2
+    protocol type: file
+    file length: 4.69 GiB (5033033728 bytes)
+    disk size: 4.69 GiB

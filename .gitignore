@@ -1,15 +1,7 @@
-# Gros fichiers de disques et ISO
 *.qcow2
 *.iso
-*.img
-*.raw
-
-# Cles privees (les .pub restent autorisees)
-tp1_kvm
+.venv/
+generated/
 bd2c_tp2
 id_*
-!*.pub
-
-# Python (TP2)
-.venv/
 __pycache__/

@@ -1,0 +1,20 @@
+== meta-data.yaml ==
+instance-id: iid-bd2c-vm01
+local-hostname: bd2c-vm01
+
+== Commande genisoimage ==
+genisoimage -output output/seed-vm01.iso -volid cidata -joliet -rock -graft-points user-data=cloud_init/user-data.yaml meta-data=cloud_init/meta-data.yaml
+
+== Taille ==
+-rw-rw-r-- 1 user user 366K Nov 21 21:32 output/seed-vm01.iso
+
+== Volume ==
+Volume id: cidata
+
+== Contenu ==
+
+Directory listing of /
+dr-xr-xr-x   2 1750 1750            2048 Nov 21 2026 [     28 02]  . 
+dr-xr-xr-x   2 1750 1750            2048 Nov 21 2026 [     28 02]  .. 
+-rw-rw-r--   1 1750 1750              53 Nov 21 2026 [     31 00]  meta-data 
+-rw-rw-r--   1 1750 1750             192 Nov 21 2026 [     32 00]  user-data 

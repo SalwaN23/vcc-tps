@@ -39,6 +39,25 @@ Fichier : `cloud_init/user-data.yaml`. Preuves : `preuves/ex02-user-data.txt`,
 
 Syntaxe vérifiée avec PyYAML (`yaml.safe_load`) : fichier valide. Un test avec
 une indentation volontairement fausse provoque bien une erreur.
+
+### Exercice 3 : datasource NoCloud et ISO seed
+
+Fichiers : `cloud_init/meta-data.yaml`, ISO générée `output/seed-vm01.iso`
+(non versionnée). Preuves : `preuves/ex03-seed-iso.txt`, `captures/ex03-seed-iso.png`.
+
+Les fichiers du dépôt portent l'extension `.yaml`, mais Cloud-Init attend les
+noms `user-data` et `meta-data` : ils sont renommés dans l'ISO avec
+`genisoimage -graft-points`.
+
+**Pourquoi `instance-id` doit changer pour une nouvelle instance ?** Cloud-Init
+identifie une instance par son `instance-id`. S'il est identique à celui déjà
+enregistré sur le disque, il considère que cette instance est déjà configurée
+et ne rejoue pas les modules de premier démarrage. Un nouvel `instance-id`
+indique une nouvelle instance, donc une nouvelle configuration.
+
+**Rôle du volume `cidata` ?** C'est l'étiquette que la datasource NoCloud
+recherche : Cloud-Init monte le disque dont le volume s'appelle `cidata` et y
+lit `user-data` et `meta-data`.
 ## 2. SSH, réseau, logiciels (Ex. 5 à 7)
 *À compléter*
 

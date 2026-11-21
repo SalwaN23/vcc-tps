@@ -1,0 +1,45 @@
+/usr/bin/cloud-init 26.2-0ubuntu1~24.04.2
+status: done
+extended_status: done
+boot_status_code: enabled-by-generator
+last_update: Thu, 01 Jan 1970 00:00:39 +0000
+detail: DataSourceNoCloud [seed=/dev/sr0]
+errors: []
+recoverable_errors: {}
+{
+ "_doc": "EXPERIMENTAL: The structure and format of content scoped under the 'ds' key may change in subsequent releases of cloud-init.",
+ "meta_data": {
+  "dsmode": "net",
+  "instance-id": "tp1-ubuntu-app01-v1",
+  "local-hostname": "app01"
+ }
+}
+  UNIT                        LOAD   ACTIVE   SUB       DESCRIPTION
+  cloud-init-hotplugd.service loaded inactive dead      Cloud-init: Hotplug Hook
+  cloud-init-local.service    loaded active   exited    Cloud-init: Local Stage (pre-network)
+  cloud-init.service          loaded active   exited    Cloud-init: Network Stage
+  cloud-init-hotplugd.socket  loaded active   listening cloud-init hotplug hook socket
+  cloud-init.target           loaded active   active    Cloud-init target
+
+Legend: LOAD   → Reflects whether the unit definition was properly loaded.
+        ACTIVE → The high-level unit activation state, i.e. generalization of SUB.
+        SUB    → The low-level unit activation state, values depend on unit type.
+
+5 loaded units listed.
+To show all installed unit files use 'systemctl list-unit-files'.
+  UNIT                        LOAD   ACTIVE   SUB       DESCRIPTION
+  cloud-config.service        loaded active   exited    Cloud-init: Config Stage
+  cloud-final.service         loaded active   exited    Cloud-init: Final Stage
+  cloud-init-hotplugd.service loaded inactive dead      Cloud-init: Hotplug Hook
+  cloud-init-local.service    loaded active   exited    Cloud-init: Local Stage (pre-network)
+  cloud-init.service          loaded active   exited    Cloud-init: Network Stage
+  cloud-init-hotplugd.socket  loaded active   listening cloud-init hotplug hook socket
+  cloud-config.target         loaded active   active    Cloud-config availability
+  cloud-init.target           loaded active   active    Cloud-init target
+
+Legend: LOAD   → Reflects whether the unit definition was properly loaded.
+        ACTIVE → The high-level unit activation state, i.e. generalization of SUB.
+        SUB    → The low-level unit activation state, values depend on unit type.
+
+8 loaded units listed.
+To show all installed unit files use 'systemctl list-unit-files'.

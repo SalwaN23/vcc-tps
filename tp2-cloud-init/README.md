@@ -58,6 +58,30 @@ indique une nouvelle instance, donc une nouvelle configuration.
 **Rôle du volume `cidata` ?** C'est l'étiquette que la datasource NoCloud
 recherche : Cloud-Init monte le disque dont le volume s'appelle `cidata` et y
 lit `user-data` et `meta-data`.
+
+### Exercice 4 : déployer une VM KVM personnalisée
+
+Disque indépendant : copie de `ubuntu-template-v1.qcow2` (image Ubuntu 24.04
+généralisée, cloud-init installé) en `bd2c-vm01.qcow2`. L'ISO seed est copiée
+dans `/var/lib/libvirt/images/` car QEMU ne peut pas toujours lire dans le
+dossier personnel. Intégrité de la copie vérifiée avec `qemu-img check`
+(même taille que le template, aucune erreur).
+
+VM créée avec `virt-install --import` : 2048 Mo de RAM, 2 vCPU, disque virtio,
+ISO seed attachée en CD-ROM, console VNC locale. La RAM de la VM hôte a été
+augmentée à environ 5 Go sous VMware pour pouvoir allouer 2048 Mo.
+
+Preuves : `preuves/ex04-deploiement.txt`, `captures/ex04-deploiement.png`.
+
+Résultats : hostname `bd2c-vm01`, `cloud-init status: done` sans erreur,
+datasource `NoCloud [seed=/dev/sr0]`, utilisateur `etudiant` créé (groupe `sudo`),
+`/etc/hosts` mis à jour. Le Machine ID est régénéré au premier démarrage.
+
+Connexion avec l'utilisateur du template : le mot de passe de `etudiant` est
+verrouillé et la clé SSH n'est ajoutée qu'à l'exercice 5.
+
+Le disque de `bd2c-vm01` a déjà effectué son premier démarrage : il n'est pas
+réutilisé pour les tests suivants (nouvelle copie du template à chaque test).
 ## 2. SSH, réseau, logiciels (Ex. 5 à 7)
 *À compléter*
 

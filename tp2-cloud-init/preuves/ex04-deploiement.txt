@@ -1,0 +1,23 @@
+ Static hostname: bd2c-vm01
+       Icon name: computer-vm
+         Chassis: vm 🖴
+      Machine ID: 4e6b238add6d4af9bcd581ce2c35ea4e
+         Boot ID: ef4f0e4c637444eca29e270e4af89cd3
+  Virtualization: kvm
+Operating System: Ubuntu 24.04.3 LTS
+          Kernel: Linux 6.8.0-147-generic
+    Architecture: x86-64
+ Hardware Vendor: QEMU
+  Hardware Model: Standard PC _Q35 + ICH9, 2009_
+Firmware Version: 1.17.0-debian-1.17.0-1ubuntu1
+   Firmware Date: Tue 2014-04-01
+    Firmware Age: 12y 7month 3w
+status: done
+extended_status: done
+boot_status_code: enabled-by-generator
+last_update: Thu, 01 Jan 1970 00:00:21 +0000
+detail: DataSourceNoCloud [seed=/dev/sr0]
+errors: []
+recoverable_errors: {}
+uid=1001(etudiant) gid=1001(etudiant) groups=1001(etudiant),27(sudo)
+127.0.1.1 bd2c-vm01 bd2c-vm01

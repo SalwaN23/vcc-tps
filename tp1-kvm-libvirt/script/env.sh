@@ -1,0 +1,11 @@
+export PREFIX=ubuntu
+export OSVAR=ubuntu24.04
+export VM="${PREFIX}-vm01"
+export CLONE="${PREFIX}-vm02"
+export RESTORE="${PREFIX}-restore01"
+export IMGDIR=/var/lib/libvirt/images
+export DISK="$IMGDIR/$VM.qcow2"
+export CAPTURE="$IMGDIR/${PREFIX}-os-capture-v1.qcow2"
+export TEMPLATE="$IMGDIR/${PREFIX}-template-v1.qcow2"
+export P="$HOME/vcc-tps/tp1-kvm-libvirt/preuves"
+export V="virsh -c qemu:///system"

@@ -1,0 +1,14 @@
+bd2c-vm02
+status: done
+extended_status: done
+boot_status_code: enabled-by-generator
+last_update: Thu, 01 Jan 1970 00:00:19 +0000
+detail: DataSourceNoCloud [seed=/dev/sr0]
+errors: []
+recoverable_errors: {}
+sudo sans mot de passe : OK
+passwordauthentication no
+lo               UNKNOWN        127.0.0.1/8 ::1/128 
+enp1s0           UP             192.168.122.139/24 metric 100 fe80::5054:ff:fee3:249d/64 
+== Test connexion par mot de passe ==
+ubuntuvm01@192.168.122.139: Permission denied (publickey).

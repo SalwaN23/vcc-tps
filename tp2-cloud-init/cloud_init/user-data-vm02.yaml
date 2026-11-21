@@ -1,0 +1,13 @@
+#cloud-config
+hostname: bd2c-vm02
+manage_etc_hosts: true
+users:
+  - default
+  - name: etudiant
+    shell: /bin/bash
+    groups: [sudo]
+    sudo: "ALL=(ALL) NOPASSWD:ALL"
+    lock_passwd: true
+    ssh_authorized_keys:
+      - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBdoORamYyjXI1I9B063iCRZtAQwj84IVEWpGgIQkqJ+ bd2c-tp2
+ssh_pwauth: false

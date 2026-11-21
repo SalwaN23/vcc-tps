@@ -83,8 +83,22 @@ verrouillé et la clé SSH n'est ajoutée qu'à l'exercice 5.
 Le disque de `bd2c-vm01` a déjà effectué son premier démarrage : il n'est pas
 réutilisé pour les tests suivants (nouvelle copie du template à chaque test).
 ## 2. SSH, réseau, logiciels (Ex. 5 à 7)
-*À compléter*
+### Exercice 5 : utilisateurs et sécurisation SSH
 
+Clé générée : `ssh-keygen -t ed25519 -f ~/.ssh/bd2c_tp2`. Seule la clé publique est
+placée dans `cloud_init/user-data-vm02.yaml` (`ssh_authorized_keys`) ; la clé privée
+reste hors du dépôt. Nouvelle VM `bd2c-vm02` (nouveau disque copié du template, nouvel
+`instance-id: iid-bd2c-vm02`), car une VM ayant déjà fait son premier démarrage ne
+rejoue pas la configuration.
+Preuves : `preuves/ex05-ssh.txt`, `captures/ex05-ssh.png`.
+
+Résultat : connexion par `ssh -i ~/.ssh/bd2c_tp2 etudiant@IP` réussie, sudo sans mot
+de passe, `PasswordAuthentication no`, et la connexion par mot de passe est refusée
+(`Permission denied (publickey)`).
+
+**Pourquoi désactiver le mot de passe ?** Un mot de passe peut être deviné ou attaqué
+par force brute ; une clé privée de 256 bits ne peut pas être devinée et ne circule pas
+sur le réseau. Seul le détenteur de la clé peut se connecter.
 ## 3. Profils, Jinja2, inventaire (Ex. 8 à 10)
 *À compléter*
 

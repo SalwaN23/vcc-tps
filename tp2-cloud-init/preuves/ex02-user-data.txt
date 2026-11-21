@@ -1,3 +1,19 @@
 == user-data.yaml ==
+#cloud-config
+hostname: bd2c-vm01
+manage_etc_hosts: true
+users:
+  - default
+  - name: etudiant
+    groups: [sudo]
+    shell: /bin/bash
+    sudo: "ALL=(ALL) NOPASSWD:ALL"
+    lock_passwd: true
 
 == Verification YAML ==
+YAML valide
+
+== Test d'erreur volontaire (indentation fausse) ==
+  in "/tmp/test-erreur.yaml", line 2, column 1
+expected <block end>, but found '<block sequence start>'
+  in "/tmp/test-erreur.yaml", line 6, column 2

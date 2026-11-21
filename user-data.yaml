@@ -1,0 +1,10 @@
+#cloud-config
+hostname: bd2c-vm01
+manage_etc_hosts: true
+users:
+  - default
+  - name: etudiant
+    groups: [sudo]
+    shell: /bin/bash
+    sudo: "ALL=(ALL) NOPASSWD:ALL"
+    lock_passwd: true

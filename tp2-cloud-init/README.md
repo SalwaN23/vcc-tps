@@ -25,6 +25,20 @@ une seule fois, à sa première vie (identifiée par l'instance-id). Il ne
 maintient pas la machine dans le temps. La gestion continue (corriger la
 dérive, redéployer des services) relève d'un outil comme Ansible (TP3).
 
+### Exercice 2 : premier fichier user-data
+
+Fichier : `cloud_init/user-data.yaml`. Preuves : `preuves/ex02-user-data.txt`,
+`captures/ex02-user-data.png`.
+
+- `hostname` : nom de la machine (`bd2c-vm01`).
+- `users` : liste des utilisateurs à créer ; `default` conserve l'utilisateur
+  de l'image, `etudiant` est ajouté.
+- `groups` : groupes de l'utilisateur. Le sujet cite `wheel` (Rocky) et `sudo`
+  (Ubuntu) ; seul `sudo` est conservé car l'image est Ubuntu 24.04.
+- `lock_passwd: true` : mot de passe verrouillé, connexion par clé SSH uniquement.
+
+Syntaxe vérifiée avec PyYAML (`yaml.safe_load`) : fichier valide. Un test avec
+une indentation volontairement fausse provoque bien une erreur.
 ## 2. SSH, réseau, logiciels (Ex. 5 à 7)
 *À compléter*
 

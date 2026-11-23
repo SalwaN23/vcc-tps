@@ -1,0 +1,39 @@
+bd2c-vm04
+status: done
+extended_status: done
+boot_status_code: enabled-by-generator
+last_update: Thu, 01 Jan 1970 00:00:18 +0000
+detail: DataSourceNoCloud [seed=/dev/sr0]
+errors: []
+recoverable_errors: {}
+--- ip addr ---
+lo               UNKNOWN        127.0.0.1/8 ::1/128 
+enp1s0           UP             192.168.122.150/24 fe80::5054:ff:fe99:7250/64 
+--- ip route ---
+default via 192.168.122.1 dev enp1s0 proto static 
+192.168.122.0/24 dev enp1s0 proto kernel scope link src 192.168.122.150 
+--- netplan ---
+network:
+  version: 2
+  ethernets:
+    enp1s0:
+      addresses:
+      - "192.168.122.150/24"
+      nameservers:
+        addresses:
+        - 192.168.122.1
+        - 8.8.8.8
+      dhcp4: false
+      routes:
+      - to: "default"
+        via: "192.168.122.1"
+--- ping passerelle ---
+PING 192.168.122.1 (192.168.122.1) 56(84) bytes of data.
+64 bytes from 192.168.122.1: icmp_seq=1 ttl=64 time=0.717 ms
+64 bytes from 192.168.122.1: icmp_seq=2 ttl=64 time=1.05 ms
+
+--- 192.168.122.1 ping statistics ---
+2 packets transmitted, 2 received, 0% packet loss, time 1002ms
+rtt min/avg/max/mdev = 0.717/0.884/1.051/0.167 ms
+--- DNS ---
+       DNS Servers: 192.168.122.1 8.8.8.8

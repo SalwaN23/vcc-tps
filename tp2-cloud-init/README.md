@@ -99,6 +99,40 @@ de passe, `PasswordAuthentication no`, et la connexion par mot de passe est refu
 **Pourquoi désactiver le mot de passe ?** Un mot de passe peut être deviné ou attaqué
 par force brute ; une clé privée de 256 bits ne peut pas être devinée et ne circule pas
 sur le réseau. Seul le détenteur de la clé peut se connecter.
+
+### Exercice 6 : configuration automatique du réseau
+
+Fichiers : `cloud_init/network-config-dhcp.yaml`, `cloud_init/network-config-static.yaml`
+(format v2, interface `enp1s0` relevée avant les tests : `preuves/ex06-avant.txt`).
+Dans l'ISO seed, ils sont renommés `network-config` avec `-graft-points`.
+Preuves : `preuves/ex06-dhcp.txt`, `preuves/ex06-static.txt`,
+`preuves/ex06-reseau-apres.xml`, `captures/ex06-dhcp.png`, `captures/ex06-static.png`.
+
+**Test DHCP (`bd2c-vm03`).** `dhcp4: true`. La VM reçoit `192.168.122.49/24`,
+route par défaut `via 192.168.122.1 proto dhcp`. Cloud-Init écrit `dhcp4: true`
+dans `/etc/netplan/50-cloud-init.yaml`.
+
+**Plan d'adressage.** Le réseau libvirt `default` est `192.168.122.0/24`, passerelle
+`192.168.122.1`. Sa plage DHCP d'origine couvrait `.2` à `.254`, donc une adresse
+statique choisie dans cette plage risquait un conflit avec une VM en DHCP. La plage
+a été réduite à `.2`-`.99` (`virsh net-edit default`, puis `net-destroy` et `net-start`).
+
+| Zone | Adresses | Usage |
+| --- | --- | --- |
+| passerelle | `192.168.122.1` | hôte KVM |
+| DHCP | `192.168.122.2` à `.99` | VM en adressage automatique |
+| statique | `192.168.122.100` à `.254` | VM en adressage fixe |
+
+**Test statique (`bd2c-vm04`).** `dhcp4: false`, adresse `192.168.122.150/24` (hors
+plage DHCP, donc sans conflit), route par défaut via `192.168.122.1`, DNS
+`192.168.122.1` et `8.8.8.8`. Résultat : `ip addr` montre `192.168.122.150/24`,
+la route est `proto static`, le ping vers la passerelle répond (0 % de perte) et
+`resolvectl` affiche les deux DNS.
+
+Chaque test utilise une nouvelle VM (nouveau disque copié du template, nouvel
+`instance-id`) car Cloud-Init n'applique la configuration qu'au premier démarrage.
+Sur Rocky Linux, Cloud-Init peut appliquer la configuration via NetworkManager ;
+non testé ici, les VM étant sous Ubuntu (netplan).
 ## 3. Profils, Jinja2, inventaire (Ex. 8 à 10)
 *À compléter*
 

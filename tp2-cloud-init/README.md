@@ -133,6 +133,32 @@ Chaque test utilise une nouvelle VM (nouveau disque copié du template, nouvel
 `instance-id`) car Cloud-Init n'applique la configuration qu'au premier démarrage.
 Sur Rocky Linux, Cloud-Init peut appliquer la configuration via NetworkManager ;
 non testé ici, les VM étant sous Ubuntu (netplan).
+
+### Exercice 7 : paquets, fichiers et commandes
+
+Fichiers : `cloud_init/user-data-vm05.yaml`, `cloud_init/meta-data-vm05.yaml`.
+Preuves : `preuves/ex07-paquets.txt`, `captures/ex07-paquets.png`.
+
+Le `user-data` reprend la base de l'exercice 5 et ajoute quatre blocs dans un seul
+document YAML (chaque clé n'apparaît qu'une fois, vérifié avec PyYAML) :
+
+| Bloc | Rôle | Étape Cloud-Init |
+| --- | --- | --- |
+| `package_update: true` | met à jour la liste des paquets | `config` |
+| `packages: [nginx]` | installe nginx | `config` |
+| `write_files` | écrit `/etc/motd` (droits `0644`) | `init` |
+| `runcmd` | active et démarre nginx (`systemctl enable --now nginx`) | `final` |
+
+Nouvelle VM `bd2c-vm05` (nouveau disque, `instance-id: iid-bd2c-vm05`), réseau en DHCP
+(`192.168.122.88`). L'installation passe par le NAT de libvirt : la VM a accès à internet
+(ping vers `8.8.8.8` et téléchargement depuis le miroir Ubuntu réussis).
+
+Résultats : `cloud-init status: done` sans erreur ; `nginx 1.24.0` installé ;
+`systemctl status nginx` : `active (running)` et `enabled` ; `curl http://localhost`
+renvoie la page `Welcome to nginx!` ; `/etc/motd` contient `Laboratoire BD2C - Cloud-Init`.
+
+Sur Rocky Linux 9, il faudrait en plus ouvrir HTTP dans le pare-feu
+(`firewall-cmd --permanent --add-service=http`) ; non testé ici, les VM étant sous Ubuntu.
 ## 3. Profils, Jinja2, inventaire (Ex. 8 à 10)
 *À compléter*
 

@@ -1,0 +1,25 @@
+bd2c-vm05
+status: done
+extended_status: done
+boot_status_code: enabled-by-generator
+last_update: Thu, 01 Jan 1970 00:00:51 +0000
+detail: DataSourceNoCloud [seed=/dev/sr0]
+errors: []
+recoverable_errors: {}
+--- nginx ---
+● nginx.service - A high performance web server and a reverse proxy server
+     Loaded: loaded (/usr/lib/systemd/system/nginx.service; enabled; preset: enabled)
+     Active: active (running) since Mon 2026-11-23 22:49:17 UTC; 12min ago
+       Docs: man:nginx(8)
+   Main PID: 1510 (nginx)
+      Tasks: 3 (limit: 2263)
+--- curl ---
+<!DOCTYPE html>
+<html>
+<head>
+<title>Welcome to nginx!</title>
+<style>
+--- motd ---
+Laboratoire BD2C - Cloud-Init
+--- paquet ---
+ii  nginx          1.24.0-2ubuntu7.21 amd64        small, powerful, scalable web/proxy server

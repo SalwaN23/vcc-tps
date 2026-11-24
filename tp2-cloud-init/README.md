@@ -211,8 +211,54 @@ Le lancement des trois instances avec `virt-install --import` (copie de l'image 
 fois) est réalisé par `scripts/deploy.sh` dans le mini-projet (exercice 12).
 
 ## 4. Diagnostic (Ex. 11)
-*À compléter*
+### Exercice 11 : diagnostic et dépannage Cloud-Init
 
+Preuves : `preuves/ex11-diagnostic.txt`, `preuves/ex11-erreur-volontaire.txt`,
+`preuves/ex11-correction.txt` ; captures `ex11-erreur-1.png`, `ex11-erreur-2.png`,
+`ex11-correction.png`.
+
+**Outils utilisés** : `cloud-init status --long` (état, datasource, erreurs),
+`cloud-init analyze show` (durée des étapes, avec `sudo`), `/var/log/cloud-init.log`
+(journal détaillé), `/var/log/cloud-init-output.log` (sortie des commandes),
+`cloud-init schema --system` (validité de la configuration traitée).
+
+**VM saine (`bd2c-vm05`)** : `status: done`, `errors: []`, `Ran 12 modules with 0 failures`,
+`Valid schema` pour `user-data` et `network-config`.
+
+**Erreur volontaire (`bd2c-vm06`)** : une ligne du `user-data` est décalée d'un espace
+(`- name: etudiant` avec une indentation d'un espace au lieu de deux). Symptômes observés :
+
+- la connexion SSH par clé est refusée (`Permission denied`) ;
+- `id etudiant` répond `no such user` ;
+- `status` indique `extended_status: degraded done`, avec des `recoverable_errors`
+  (`Failed loading yaml blob ... line 6, column 2 ... expected <block end>`) ;
+- le journal contient trois `WARNING`, dont `Failed at merging in cloud config part:
+  empty cloud config` : tout le `user-data` est ignoré, pas seulement la ligne fautive ;
+- le nom de machine `bd2c-vm06` est pourtant appliqué, car il vient du `meta-data`,
+  qui était correct.
+
+Piège rencontré : `cloud-init schema --system` répond `Valid schema` sur cette VM, parce
+qu'il vérifie la configuration déjà traitée (vide, donc valide). Pour voir l'erreur, il faut
+valider le fichier brut : `cloud-init schema --config-file /var/lib/cloud/instance/user-data.txt`
+répond `not valid YAML` avec la ligne et la colonne.
+
+**Correction (`bd2c-vm07`)** : indentation remise à deux espaces (`diff` : deux lignes
+changées), nouvelle VM avec un nouveau disque copié du template et un nouvel `instance-id`.
+Résultat : connexion par clé réussie, `etudiant` créé, `status: done` sans avertissement.
+
+**Pourquoi la même configuration ne se réexécute-t-elle pas toujours au redémarrage ?**
+Cloud-Init mémorise l'`instance-id` et la fréquence de chaque module. Les modules
+`once-per-instance` ne rejouent pas tant que l'`instance-id` ne change pas (journal :
+`already ran (freq=once-per-instance)`) ; seuls les modules `always`, comme `final_message`,
+repassent. `cloud-init clean` efface cet état dans une VM de laboratoire, mais il ne remplace
+pas un redéploiement propre depuis une image généralisée.
+
+**Comment distinguer une erreur de datasource d'une erreur de module ?** Dans
+`cloud-init status --long`, le champ `detail` donne la datasource : si elle n'est pas trouvée
+(`DataSourceNone`), ni `meta-data` ni `user-data` ne sont lus, et il faut regarder le début de
+`cloud-init.log` (étape `init-local`). Si elle est trouvée (`DataSourceNoCloud [seed=/dev/sr0]`)
+mais qu'une partie de la configuration manque, l'erreur vient du contenu ou d'un module : on
+regarde `recoverable_errors`, `cloud-init-output.log` et la section du module concerné.
 ## 5. Mini-projet web01 / db01 / admin01 (Ex. 12)
 *À compléter*
 

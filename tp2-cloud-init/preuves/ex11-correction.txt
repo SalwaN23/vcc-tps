@@ -1,0 +1,17 @@
+== hostname ==
+bd2c-vm07
+
+== utilisateur ==
+uid=1001(etudiant) gid=1001(etudiant) groups=1001(etudiant),27(sudo)
+
+== cloud-init status --long ==
+status: done
+extended_status: done
+boot_status_code: enabled-by-generator
+last_update: Thu, 01 Jan 1970 00:00:18 +0000
+detail: DataSourceNoCloud [seed=/dev/sr0]
+errors: []
+recoverable_errors: {}
+
+== schema du user-data brut ==
+Valid schema /var/lib/cloud/instance/user-data.txt

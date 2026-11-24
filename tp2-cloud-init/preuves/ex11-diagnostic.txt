@@ -1,0 +1,120 @@
+== cloud-init status --long ==
+status: done
+extended_status: done
+boot_status_code: enabled-by-generator
+last_update: Thu, 01 Jan 1970 00:00:17 +0000
+detail: DataSourceNoCloud [seed=/dev/sr0]
+errors: []
+recoverable_errors: {}
+
+== cloud-init analyze show (début) ==
+
+== cloud-init.log (fin) ==
+2026-11-24 21:49:40,792 - helpers.py[DEBUG]: config-scripts_user already ran (freq=once-per-instance)
+2026-11-24 21:49:40,792 - handlers.py[DEBUG]: finish: modules-final/config-scripts_user: SUCCESS: config-scripts_user previously ran (duration: 0.000s)
+2026-11-24 21:49:40,792 - modules.py[DEBUG]: Running module ssh_authkey_fingerprints (<module 'cloudinit.config.cc_ssh_authkey_fingerprints' from '/usr/lib/python3/dist-packages/cloudinit/config/cc_ssh_authkey_fingerprints.py'>) with frequency once-per-instance
+2026-11-24 21:49:40,792 - handlers.py[DEBUG]: start: modules-final/config-ssh_authkey_fingerprints: running config-ssh_authkey_fingerprints with frequency once-per-instance
+2026-11-24 21:49:40,792 - helpers.py[DEBUG]: config-ssh_authkey_fingerprints already ran (freq=once-per-instance)
+2026-11-24 21:49:40,792 - handlers.py[DEBUG]: finish: modules-final/config-ssh_authkey_fingerprints: SUCCESS: config-ssh_authkey_fingerprints previously ran (duration: 0.000s)
+2026-11-24 21:49:40,792 - modules.py[DEBUG]: Running module keys_to_console (<module 'cloudinit.config.cc_keys_to_console' from '/usr/lib/python3/dist-packages/cloudinit/config/cc_keys_to_console.py'>) with frequency once-per-instance
+2026-11-24 21:49:40,793 - handlers.py[DEBUG]: start: modules-final/config-keys_to_console: running config-keys_to_console with frequency once-per-instance
+2026-11-24 21:49:40,793 - helpers.py[DEBUG]: config-keys_to_console already ran (freq=once-per-instance)
+2026-11-24 21:49:40,793 - handlers.py[DEBUG]: finish: modules-final/config-keys_to_console: SUCCESS: config-keys_to_console previously ran (duration: 0.000s)
+2026-11-24 21:49:40,793 - modules.py[DEBUG]: Running module install_hotplug (<module 'cloudinit.config.cc_install_hotplug' from '/usr/lib/python3/dist-packages/cloudinit/config/cc_install_hotplug.py'>) with frequency once-per-instance
+2026-11-24 21:49:40,793 - handlers.py[DEBUG]: start: modules-final/config-install_hotplug: running config-install_hotplug with frequency once-per-instance
+2026-11-24 21:49:40,793 - helpers.py[DEBUG]: config-install_hotplug already ran (freq=once-per-instance)
+2026-11-24 21:49:40,793 - handlers.py[DEBUG]: finish: modules-final/config-install_hotplug: SUCCESS: config-install_hotplug previously ran (duration: 0.000s)
+2026-11-24 21:49:40,793 - modules.py[DEBUG]: Running module final_message (<module 'cloudinit.config.cc_final_message' from '/usr/lib/python3/dist-packages/cloudinit/config/cc_final_message.py'>) with frequency always
+2026-11-24 21:49:40,793 - handlers.py[DEBUG]: start: modules-final/config-final_message: running config-final_message with frequency always
+2026-11-24 21:49:40,793 - helpers.py[DEBUG]: Running config-final_message using lock (<cloudinit.helpers.DummyLock object at 0x7339909a0c80>)
+2026-11-24 21:49:40,793 - util.py[DEBUG]: Reading from /proc/uptime (quiet=False)
+2026-11-24 21:49:40,794 - util.py[DEBUG]: Reading 12 bytes from /proc/uptime
+2026-11-24 21:49:40,800 - log_util.py[DEBUG]: Cloud-init v. 26.2-0ubuntu1~24.04.2 finished at Tue, 24 Nov 2026 21:49:40 +0000. Datasource DataSourceNoCloud [seed=/dev/sr0].  Up 17.96 seconds
+2026-11-24 21:49:40,800 - util.py[DEBUG]: Writing to /var/lib/cloud/instance/boot-finished - wb: [644] 67 bytes
+2026-11-24 21:49:40,801 - handlers.py[DEBUG]: finish: modules-final/config-final_message: SUCCESS: config-final_message ran successfully and took 0.008 seconds (duration: 0.008s)
+2026-11-24 21:49:40,801 - main.py[DEBUG]: Ran 12 modules with 0 failures
+2026-11-24 21:49:40,801 - util.py[DEBUG]: Reading from /proc/uptime (quiet=False)
+2026-11-24 21:49:40,801 - util.py[DEBUG]: Reading 12 bytes from /proc/uptime
+2026-11-24 21:49:40,802 - atomic_helper.py[DEBUG]: Atomically writing to file /var/lib/cloud/data/status.json (via temporary file /var/lib/cloud/data/tmpidssy7je) - w: [644] 521 bytes/chars
+2026-11-24 21:49:40,803 - atomic_helper.py[DEBUG]: Atomically writing to file /var/lib/cloud/data/result.json (via temporary file /var/lib/cloud/data/tmpvh3z_z90) - w: [644] 84 bytes/chars
+2026-11-24 21:49:40,803 - util.py[DEBUG]: Creating symbolic link from '/run/cloud-init/result.json' => '../../var/lib/cloud/data/result.json'
+2026-11-24 21:49:40,803 - performance.py[DEBUG]: cloud-init stage: 'modules-final' took 0.129 seconds
+2026-11-24 21:49:40,804 - handlers.py[DEBUG]: finish: modules-final: SUCCESS: running modules for final (duration: 0.129s)
+
+== cloud-init-output.log (fin) ==
+ci-info: |   0   |    0.0.0.0    | 192.168.122.1 |     0.0.0.0     |   enp1s0  |   UG  |
+ci-info: |   1   | 192.168.122.0 |    0.0.0.0    |  255.255.255.0  |   enp1s0  |   U   |
+ci-info: |   2   | 192.168.122.1 |    0.0.0.0    | 255.255.255.255 |   enp1s0  |   UH  |
+ci-info: +-------+---------------+---------------+-----------------+-----------+-------+
+ci-info: +++++++++++++++++++Route IPv6 info+++++++++++++++++++
+ci-info: +-------+-------------+---------+-----------+-------+
+ci-info: | Route | Destination | Gateway | Interface | Flags |
+ci-info: +-------+-------------+---------+-----------+-------+
+ci-info: |   0   |  fe80::/64  |    ::   |   enp1s0  |   U   |
+ci-info: |   2   |    local    |    ::   |   enp1s0  |   U   |
+ci-info: |   3   |  multicast  |    ::   |   enp1s0  |   U   |
+ci-info: +-------+-------------+---------+-----------+-------+
+Cloud-init v. 26.2-0ubuntu1~24.04.2 running 'modules:config' at Tue, 24 Nov 2026 21:49:39 +0000. Up 17.09 seconds.
+Cloud-init v. 26.2-0ubuntu1~24.04.2 running 'modules:final' at Tue, 24 Nov 2026 21:49:40 +0000. Up 17.86 seconds.
+Cloud-init v. 26.2-0ubuntu1~24.04.2 finished at Tue, 24 Nov 2026 21:49:40 +0000. Datasource DataSourceNoCloud [seed=/dev/sr0].  Up 17.96 seconds
+
+== cloud-init schema --system ==
+Found cloud-config data types: user-data, network-config
+
+1. user-data at /var/lib/cloud/instances/iid-bd2c-vm05/cloud-config.txt:
+  Valid schema user-data
+
+2. network-config at /var/lib/cloud/instances/iid-bd2c-vm05/network-config.json:
+  Valid schema network-config
+
+== cloud-init analyze show (avec sudo) ==
+-- Boot Record 01 --
+The total time elapsed since completing an event is printed after the "@" character.
+The time the event takes is printed after the "+" character.
+
+Starting stage: init-local
+|`->no cache found (duration: 0.000s) @00.00700s +00.00000s
+|`->found local data from DataSourceNoCloud (duration: 0.719s) @00.02400s +00.71900s
+Finished stage: (init-local) 00.81400 seconds
+
+Starting stage: init-network
+|`->restored from cache with run check: DataSourceNoCloud [seed=/dev/sr0] (duration: 0.003s) @05.11600s +00.00300s
+|`->setting up datasource (duration: 0.000s) @05.15900s +00.00000s
+|`->reading and applying user-data (duration: 0.004s) @05.17300s +00.00500s
+|`->reading and applying vendor-data (duration: 0.000s) @05.17800s +00.00000s
+|`->reading and applying vendor-data2 (duration: 0.000s) @05.17800s +00.00000s
+|`->activating datasource (duration: 0.001s) @05.21200s +00.00100s
+|`->config-seed_random ran successfully and took 0.001 seconds (duration: 0.001s) @05.24700s +00.00100s
+|`->config-write_files ran successfully and took 0.002 seconds (duration: 0.002s) @05.24800s +00.00200s
+|`->config-growpart ran successfully and took 0.045 seconds (duration: 0.045s) @05.25000s +00.04600s
+|`->config-resizefs ran successfully and took 0.022 seconds (duration: 0.022s) @05.29600s +00.02100s
+|`->config-mounts ran successfully and took 0.001 seconds (duration: 0.001s) @05.31800s +00.00100s
+|`->config-set_hostname ran successfully and took 0.001 seconds (duration: 0.001s) @05.31900s +00.00100s
+|`->config-update_hostname ran successfully and took 0.001 seconds (duration: 0.001s) @05.32000s +00.00100s
+|`->config-update_etc_hosts ran successfully and took 0.009 seconds (duration: 0.009s) @05.32100s +00.00900s
+|`->config-users_groups ran successfully and took 0.233 seconds (duration: 0.233s) @05.33200s +00.23200s
+|`->config-ssh ran successfully and took 0.748 seconds (duration: 0.748s) @05.56500s +00.74700s
+|`->config-set_passwords ran successfully and took 0.030 seconds (duration: 0.030s) @06.31300s +00.02900s
+Finished stage: (init-network) 01.26900 seconds
+
+Starting stage: modules-config
+|`->config-ssh_import_id ran successfully and took 0.001 seconds (duration: 0.001s) @08.46000s +00.00100s
+|`->config-locale ran successfully and took 0.001 seconds (duration: 0.001s) @08.46100s +00.00100s
+|`->config-grub_dpkg ran successfully and took 0.402 seconds (duration: 0.402s) @08.46200s +00.40200s
+|`->config-apt_configure ran successfully and took 0.044 seconds (duration: 0.044s) @08.86400s +00.04400s
+|`->config-runcmd ran successfully and took 0.002 seconds (duration: 0.002s) @08.90800s +00.00200s
+|`->config-byobu ran successfully and took 0.000 seconds (duration: 0.001s) @08.91100s +00.00000s
+Finished stage: (modules-config) 00.48500 seconds
+
+Starting stage: modules-final
+|`->config-package_update_upgrade_install ran successfully and took 32.356 seconds (duration: 32.356s) @09.45200s +32.35700s
+
+== cloud-init analyze blame (étapes les plus lentes) ==
+-- Boot Record 01 --
+     32.35700s (modules-final/config-package_update_upgrade_install)
+     00.94400s (modules-final/config-scripts_user)
+     00.74700s (init-network/config-ssh)
+     00.71900s (init-local/search-NoCloud)
+     00.40200s (modules-config/config-grub_dpkg)
+     00.23200s (init-network/config-users_groups)
+     00.06500s (modules-final/config-keys_to_console)

@@ -1,0 +1,63 @@
+== hostname (attendu : bd2c-vm06) ==
+bd2c-vm06
+
+== utilisateur etudiant existe ? ==
+id: ‘etudiant’: no such user
+
+== cloud-init status --long ==
+status: done
+extended_status: degraded done
+boot_status_code: enabled-by-generator
+last_update: Thu, 01 Jan 1970 00:00:17 +0000
+detail: DataSourceNoCloud [seed=/dev/sr0]
+errors: []
+recoverable_errors:
+WARNING:
+	- Failed loading yaml blob. Invalid format at line 2 column 1: "while parsing a block mapping   in "<unicode string>", line 2, column 1:     hostname: bd2c-vm06     ^ expected <block end>, but found '<block sequence start>'   in "<unicode string>", line 6, column 2:      - name: etudiant      ^"
+	- Failed loading yaml blob. Invalid format at line 2 column 1: "while parsing a block mapping   in "<unicode string>", line 2, column 1:     hostname: bd2c-vm06     ^ expected <block end>, but found '<block sequence start>'   in "<unicode string>", line 6, column 2:      - name: etudiant      ^"
+	- Failed at merging in cloud config part from part-001: empty cloud config
+
+== cloud-init schema --system ==
+[sudo] password for ubuntuvm01: 
+Sorry, try again.
+[sudo] password for ubuntuvm01: 
+Found cloud-config data types: user-data, network-config
+
+1. user-data at /var/lib/cloud/instances/iid-bd2c-vm06/cloud-config.txt:
+  Valid schema user-data
+
+2. network-config at /var/lib/cloud/instances/iid-bd2c-vm06/network-config.json:
+  Valid schema network-config
+
+== erreurs dans cloud-init.log ==
+2026-11-24 22:17:23,342 - util.py[DEBUG]: Attempting to load yaml from string of length 53 with allowed root types (<class 'dict'>,)
+2026-11-24 22:17:23,342 - util.py[DEBUG]: Attempting to load yaml from string of length 48 with allowed root types (<class 'dict'>,)
+2026-11-24 22:17:23,346 - util.py[DEBUG]: Attempting to load yaml from string of length 3718 with allowed root types (<class 'dict'>,)
+2026-11-24 22:17:23,353 - util.py[DEBUG]: Attempting to load yaml from string of length 35 with allowed root types (<class 'dict'>,)
+2026-11-24 22:17:23,354 - util.py[DEBUG]: Attempting to load yaml from string of length 120 with allowed root types (<class 'dict'>,)
+2026-11-24 22:17:23,354 - util.py[DEBUG]: Attempting to load yaml from string of length 343 with allowed root types (<class 'dict'>,)
+2026-11-24 22:17:23,355 - util.py[DEBUG]: Attempting to load yaml from string of length 2071 with allowed root types (<class 'dict'>,)
+2026-11-24 22:17:23,358 - util.py[DEBUG]: Attempting to load yaml from string of length 35 with allowed root types (<class 'dict'>,)
+2026-11-24 22:17:23,358 - util.py[DEBUG]: Attempting to load yaml from string of length 0 with allowed root types (<class 'dict'>,)
+2026-11-24 22:17:23,362 - util.py[DEBUG]: Attempting to load yaml from string of length 3718 with allowed root types (<class 'dict'>,)
+2026-11-24 22:17:23,368 - util.py[DEBUG]: Attempting to load yaml from string of length 35 with allowed root types (<class 'dict'>,)
+2026-11-24 22:17:23,368 - util.py[DEBUG]: Attempting to load yaml from string of length 120 with allowed root types (<class 'dict'>,)
+== schema du user-data brut ==
+[sudo] password for ubuntuvm01: 
+Error: Cloud config schema errors: format-l2.c1: File /var/lib/cloud/instance/user-data.txt is not valid YAML. while parsing a block mapping
+  in "<unicode string>", line 2, column 1:
+    hostname: bd2c-vm06
+    ^
+expected <block end>, but found '<block sequence start>'
+  in "<unicode string>", line 6, column 2:
+     - name: etudiant
+     ^
+
+Error: Invalid schema: user-data
+
+Invalid user-data /var/lib/cloud/instance/user-data.txt
+
+== avertissements du journal ==
+2026-11-24 22:17:27,499 - util.py[WARNING]: Failed loading yaml blob. Invalid format at line 2 column 1: "while parsing a block mapping
+2026-11-24 22:17:27,510 - util.py[WARNING]: Failed loading yaml blob. Invalid format at line 2 column 1: "while parsing a block mapping
+2026-11-24 22:17:27,510 - cloud_config.py[WARNING]: Failed at merging in cloud config part from part-001: empty cloud config

@@ -1,0 +1,6 @@
+role: admin
+service: none
+packages:
+  - htop
+  - curl
+  - net-tools

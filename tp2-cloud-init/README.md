@@ -160,7 +160,55 @@ renvoie la page `Welcome to nginx!` ; `/etc/motd` contient `Laboratoire BD2C - C
 Sur Rocky Linux 9, il faudrait en plus ouvrir HTTP dans le pare-feu
 (`firewall-cmd --permanent --add-service=http`) ; non testé ici, les VM étant sous Ubuntu.
 ## 3. Profils, Jinja2, inventaire (Ex. 8 à 10)
-*À compléter*
+### Exercice 8 : profils réutilisables
+
+Trois profils dans `profils/` : `web.yaml` (nginx), `database.yaml` (mariadb-server),
+`admin.yaml` (htop, curl, net-tools). Chaque profil contient `role`, `service` et une
+liste `packages`.
+
+Un profil est une **donnée d'entrée** : il décrit ce qui change selon le rôle de la VM.
+Ce n'est pas un fichier cloud-config complet (pas de `#cloud-config`, pas d'utilisateur
+ni de clé SSH) ; c'est le modèle qui l'insère dans un vrai `user-data`.
+
+### Exercice 9 : génération avec Jinja2
+
+Modèle : `templates/user_data.j2`, dans un environnement virtuel Python (`.venv`,
+Jinja2 et PyYAML).
+
+- **Variables** : `{{ hostname }}`, `{{ username }}`, `{{ ssh_public_key }}`, `{{ service }}`.
+- **Boucle** : `{% for pkg in packages %}` écrit une ligne `- paquet` par paquet du profil.
+- **Condition** (ajout par rapport au sujet) : `{% if service != 'none' %}` n'écrit le bloc
+  `runcmd` que si le profil a un service à démarrer ; le profil admin n'en a pas.
+
+**Séparation données et modèle** : les données (inventaire, profils) disent *quoi* installer
+et *sur quelle VM* ; le modèle dit *comment* l'écrire en cloud-config. Changer une VM revient
+à changer une ligne de données, sans toucher au modèle, et la même structure vaut pour 3 ou
+100 VM.
+
+### Exercice 10 : inventaire YAML et génération de plusieurs VM
+
+Inventaire : `inventaire/vms.yaml`.
+
+| Nom | Hostname | OS | CPU | RAM (Mo) | Profil |
+| --- | --- | --- | --- | --- | --- |
+| `vm_web` | `web01` | ubuntu | 2 | 2048 | web |
+| `vm_db` | `db01` | ubuntu | 2 | 2048 | database |
+| `vm_admin` | `admin01` | ubuntu | 1 | 1024 | admin |
+
+Script : `scripts/generate.py`. Pour chaque VM, il lit son profil, remplit le modèle, écrit
+`user-data` et `meta-data` dans `output/<nom>/`, puis fabrique `seed.iso` (volume `cidata`)
+avec `genisoimage`. Différences avec le script du sujet : il est dans `scripts/` (la racine du
+projet s'obtient avec `.parent.parent`), l'`instance-id` est unique par VM
+(`iid-bd2c-web01`, `iid-bd2c-db01`, `iid-bd2c-admin01`) et les options `trim_blocks` et
+`lstrip_blocks` évitent les lignes vides laissées par les balises Jinja2.
+
+Preuves : `preuves/ex08-10-generation.txt`, `captures/ex08-10-generation-1.png`,
+`captures/ex08-10-generation-2.png`. Résultat : trois dossiers générés ; `runcmd` présent
+pour web et database (nginx, mariadb) et absent pour admin ; chaque ISO contient `user-data`
+et `meta-data` (volume `cidata`).
+
+Le lancement des trois instances avec `virt-install --import` (copie de l'image de base trois
+fois) est réalisé par `scripts/deploy.sh` dans le mini-projet (exercice 12).
 
 ## 4. Diagnostic (Ex. 11)
 *À compléter*

@@ -1,0 +1,49 @@
+== Arborescence générée ==
+output/vm_admin/meta-data
+output/vm_admin/seed.iso
+output/vm_admin/user-data
+output/vm_db/meta-data
+output/vm_db/seed.iso
+output/vm_db/user-data
+output/vm_web/meta-data
+output/vm_web/seed.iso
+output/vm_web/user-data
+
+== user-data de admin01 (pas de runcmd attendu) ==
+#cloud-config
+hostname: admin01
+manage_etc_hosts: true
+users:
+  - default
+  - name: etudiant
+    shell: /bin/bash
+    groups: [sudo]
+    sudo: "ALL=(ALL) NOPASSWD:ALL"
+    lock_passwd: true
+    ssh_authorized_keys:
+      - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBdoORamYyjXI1I9B063iCRZtAQwj84IVEWpGgIQkqJ+ bd2c-tp2
+ssh_pwauth: false
+package_update: true
+packages:
+  - htop
+  - curl
+  - net-tools
+
+== runcmd présent ? ==
+vm_web : 1
+vm_db : 1
+vm_admin : 0
+
+== Contenu des ISO ==
+-- vm_web --
+Volume id: cidata
+-rw-rw-r--   1 1750 1750              50 Nov 24 2026 [     31 00]  meta-data 
+-rw-rw-r--   1 1750 1750             423 Nov 24 2026 [     32 00]  user-data 
+-- vm_db --
+Volume id: cidata
+-rw-rw-r--   1 1750 1750              48 Nov 24 2026 [     31 00]  meta-data 
+-rw-rw-r--   1 1750 1750             433 Nov 24 2026 [     32 00]  user-data 
+-- vm_admin --
+Volume id: cidata
+-rw-rw-r--   1 1750 1750              54 Nov 24 2026 [     31 00]  meta-data 
+-rw-rw-r--   1 1750 1750             394 Nov 24 2026 [     32 00]  user-data 

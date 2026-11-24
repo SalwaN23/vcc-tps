@@ -1,0 +1,4 @@
+role: web
+service: nginx
+packages:
+  - nginx

@@ -1,0 +1,22 @@
+vms:
+  - name: vm_web
+    hostname: web01
+    username: etudiant
+    os: ubuntu
+    cpu: 2
+    ram: 2048
+    profile: web
+  - name: vm_db
+    hostname: db01
+    username: etudiant
+    os: ubuntu
+    cpu: 2
+    ram: 2048
+    profile: database
+  - name: vm_admin
+    hostname: admin01
+    username: etudiant
+    os: ubuntu
+    cpu: 1
+    ram: 1024
+    profile: admin

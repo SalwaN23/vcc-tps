@@ -1,0 +1,21 @@
+== hostname ==
+web01
+
+== cloud-init ==
+status: done
+extended_status: done
+boot_status_code: enabled-by-generator
+last_update: Thu, 01 Jan 1970 00:01:00 +0000
+detail: DataSourceNoCloud [seed=/dev/sr0]
+errors: []
+recoverable_errors: {}
+
+== reseau ==
+lo               UNKNOWN        127.0.0.1/8 ::1/128 
+enp1s0           UP             192.168.122.80/24 metric 100 fe80::5054:ff:fe1f:5fa0/64 
+default via 192.168.122.1 dev enp1s0 proto dhcp src 192.168.122.80 metric 100 
+192.168.122.0/24 dev enp1s0 proto kernel scope link src 192.168.122.80 metric 100 
+
+== nginx ==
+active
+<title>Welcome to nginx!</title>

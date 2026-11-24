@@ -260,9 +260,61 @@ pas un redéploiement propre depuis une image généralisée.
 mais qu'une partie de la configuration manque, l'erreur vient du contenu ou d'un module : on
 regarde `recoverable_errors`, `cloud-init-output.log` et la section du module concerné.
 ## 5. Mini-projet web01 / db01 / admin01 (Ex. 12)
-*À compléter*
+### Exercice 12 : infrastructure multi-VM personnalisée
 
+Trois VM sont créées depuis la même image (`ubuntu-template-v1`), sans écrire aucun
+`user-data` à la main. Chaîne : `inventaire/vms.yaml` + `profils/` + `templates/user_data.j2`
+→ `scripts/generate.py` → `output/vm_*/` (user-data, meta-data, seed.iso)
+→ `scripts/deploy.sh` → KVM.
+
+| VM | Profil | Logiciel | vCPU | RAM (Mo) | Adresse | instance-id |
+| --- | --- | --- | --- | --- | --- | --- |
+| `web01` | web | nginx | 2 | 2048 | 192.168.122.80 | `iid-bd2c-web01` |
+| `db01` | database | mariadb-server | 2 | 2048 | 192.168.122.X | `iid-bd2c-db01` |
+| `admin01` | admin | htop, curl, net-tools | 1 | 1024 | 192.168.122.X | `iid-bd2c-admin01` |
+
+**Commandes de création (reproductibles) :**
+
+```
+source .venv/bin/activate
+python scripts/generate.py
+./scripts/deploy.sh vm_web
+./scripts/deploy.sh vm_db
+./scripts/deploy.sh vm_admin
+```
+
+`deploy.sh` copie le template vers un disque propre à la VM, copie son seed, lit le CPU et la
+RAM dans l'inventaire et lance `virt-install --import`. Il refuse de s'exécuter si la VM ou
+son disque existe déjà, pour ne jamais réécrire le disque d'une VM en marche.
+
+**Contraintes du sujet :** noms et `instance-id` uniques (vérifiés dans
+`preuves/ex12-recapitulatif.txt`) ; disques indépendants (un `.qcow2` par VM) ; aucune clé
+privée dans le dépôt (seule la clé publique est dans les `user-data`) ; réseau vérifié dans
+chaque VM (`ip addr`, `ip route`, ping vers la passerelle).
+
+**Mémoire limitée :** l'hôte dispose d'environ 5,3 Go de RAM ; les trois VM (2048 + 2048 +
+1024 Mo) sont donc lancées successivement, chacune étant éteinte avant la suivante.
+
+**Résultats :** `web01` : nginx actif, page `Welcome to nginx!` ; `db01` : MariaDB active,
+requête `SELECT VERSION()` réussie ; `admin01` : htop, curl et netstat présents, pas de
+`runcmd` (profil sans service). Les trois : `cloud-init status: done`, `errors: []`.
+Preuves : `preuves/ex12-*.txt`, captures `captures/ex12-*.png`, arborescence
+`preuves/arborescence.txt`.
+
+**Préparation du TP3 (Ansible) :** les adresses IP, la clé SSH `bd2c_tp2`, les profils et
+l'inventaire sont conservés ; Cloud-Init réalise la configuration initiale, Ansible assurera
+la configuration continue.
 ## 6. Difficultés rencontrées
 | Problème | Diagnostic | Solution |
 |----------|------------|----------|
-| | | |
+| Fichier créé à la racine du dépôt | commande lancée avant le `cd`, dossier absent | créer la structure puis `git mv` |
+| Script 05 : `unexpected EOF` | une apostrophe dans un message ouvre un guillemet non fermé | retirer l'apostrophe |
+| Nom de capture refusé | un `/` n'est pas permis dans un nom de fichier | nom simple puis `mv` |
+| Un seul service Cloud-Init visible sur quatre | le filtre `cloud-init*` ne couvre pas `cloud-config` ni `cloud-final` | filtre `cloud-*` |
+| Mémoire insuffisante (1,7 Go) | trop peu de RAM pour des VM de 2 Go | RAM de la VM hôte portée à 5,3 Go sous VMware |
+| Adresse statique dans la plage DHCP | plage d'origine `.2` à `.254` | plage réduite à `.2`-`.99` |
+| Disque presque plein (4,9 Go) | plusieurs VM de test de 4,7 Go | suppression des VM de test dont les preuves étaient sauvegardées |
+| Disque d'une VM réécrit | bloc de copie relancé alors que la VM tournait | VM supprimée puis recréée ; `deploy.sh` refuse si la VM existe |
+| `Could not resolve hostname` | `$` devant l'adresse et `/24` dans la variable | `IP=192.168.122.139` sans `$` ni masque |
+| `README.md.save` envoyé sur GitHub | sauvegarde nano interrompue | `git rm` |
+| `schema --system` valide malgré l'erreur | il vérifie la configuration déjà traitée (vide) | `--config-file /var/lib/cloud/instance/user-data.txt` |

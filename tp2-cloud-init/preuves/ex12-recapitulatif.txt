@@ -1,0 +1,51 @@
+== Inventaire ==
+vms:
+  - name: vm_web
+    hostname: web01
+    username: etudiant
+    os: ubuntu
+    cpu: 2
+    ram: 2048
+    profile: web
+  - name: vm_db
+    hostname: db01
+    username: etudiant
+    os: ubuntu
+    cpu: 2
+    ram: 2048
+    profile: database
+  - name: vm_admin
+    hostname: admin01
+    username: etudiant
+    os: ubuntu
+    cpu: 1
+    ram: 1024
+    profile: admin
+
+== instance-id et hostname (uniques) ==
+output/vm_admin/meta-data:instance-id: iid-bd2c-admin01
+output/vm_admin/meta-data:local-hostname: admin01
+output/vm_db/meta-data:instance-id: iid-bd2c-db01
+output/vm_db/meta-data:local-hostname: db01
+output/vm_web/meta-data:instance-id: iid-bd2c-web01
+output/vm_web/meta-data:local-hostname: web01
+
+== Disques independants (un fichier par VM) ==
+-rw-r--r--+ 1 libvirt-qemu kvm   5078056960 Nov 24 23:41 bd2c-db01.qcow2
+-rw-r--r--  1 libvirt-qemu kvm       374784 Nov 24 23:38 bd2c-seed-db01.iso
+-rw-r--r--  1 libvirt-qemu kvm       374784 Nov 24 23:20 bd2c-seed-web01.iso
+-rw-r--r--  1 root         root  5062721536 Nov 24 23:37 bd2c-web01.qcow2
+
+== VM KVM ==
+ Id   Name           State
+-------------------------------
+ 6    bd2c-db01      running
+ -    bd2c-web01     shut off
+ -    ubuntu-app01   shut off
+ -    ubuntu-app02   shut off
+ -    ubuntu-vm01    shut off
+ -    ubuntu-vm02    shut off
+
+
+== Cle privee dans le depot ? (aucune ligne attendue) ==
+aucune

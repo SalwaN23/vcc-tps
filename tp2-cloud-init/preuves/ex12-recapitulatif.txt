@@ -31,7 +31,9 @@ output/vm_web/meta-data:instance-id: iid-bd2c-web01
 output/vm_web/meta-data:local-hostname: web01
 
 == Disques independants (un fichier par VM) ==
--rw-r--r--+ 1 libvirt-qemu kvm   5078056960 Nov 24 23:41 bd2c-db01.qcow2
+-rw-r--r--  1 root         root  5047386112 Nov 25 09:54 bd2c-admin01.qcow2
+-rw-r--r--  1 root         root  8292335616 Nov 25 09:31 bd2c-db01.qcow2
+-rw-r--r--  1 libvirt-qemu kvm       374784 Nov 25 09:31 bd2c-seed-admin01.iso
 -rw-r--r--  1 libvirt-qemu kvm       374784 Nov 24 23:38 bd2c-seed-db01.iso
 -rw-r--r--  1 libvirt-qemu kvm       374784 Nov 24 23:20 bd2c-seed-web01.iso
 -rw-r--r--  1 root         root  5062721536 Nov 24 23:37 bd2c-web01.qcow2
@@ -39,7 +41,8 @@ output/vm_web/meta-data:local-hostname: web01
 == VM KVM ==
  Id   Name           State
 -------------------------------
- 6    bd2c-db01      running
+ -    bd2c-admin01   shut off
+ -    bd2c-db01      shut off
  -    bd2c-web01     shut off
  -    ubuntu-app01   shut off
  -    ubuntu-app02   shut off

@@ -270,8 +270,8 @@ Trois VM sont créées depuis la même image (`ubuntu-template-v1`), sans écrir
 | VM | Profil | Logiciel | vCPU | RAM (Mo) | Adresse | instance-id |
 | --- | --- | --- | --- | --- | --- | --- |
 | `web01` | web | nginx | 2 | 2048 | 192.168.122.80 | `iid-bd2c-web01` |
-| `db01` | database | mariadb-server | 2 | 2048 | 192.168.122.X | `iid-bd2c-db01` |
-| `admin01` | admin | htop, curl, net-tools | 1 | 1024 | 192.168.122.X | `iid-bd2c-admin01` |
+| `db01` | database | mariadb-server | 2 | 2048 | 192.168.122.94 | `iid-bd2c-db01` |
+| `admin01` | admin | htop, curl, net-tools | 1 | 1024 | 192.168.122.61 | `iid-bd2c-admin01` |
 
 **Commandes de création (reproductibles) :**
 

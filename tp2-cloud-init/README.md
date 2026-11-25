@@ -304,7 +304,9 @@ Preuves : `preuves/ex12-*.txt`, captures `captures/ex12-*.png`, arborescence
 **Préparation du TP3 (Ansible) :** les adresses IP, la clé SSH `bd2c_tp2`, les profils et
 l'inventaire sont conservés ; Cloud-Init réalise la configuration initiale, Ansible assurera
 la configuration continue.
+
 ## 6. Difficultés rencontrées
+
 | Problème | Diagnostic | Solution |
 |----------|------------|----------|
 | Fichier créé à la racine du dépôt | commande lancée avant le `cd`, dossier absent | créer la structure puis `git mv` |
@@ -318,3 +320,6 @@ la configuration continue.
 | `Could not resolve hostname` | `$` devant l'adresse et `/24` dans la variable | `IP=192.168.122.139` sans `$` ni masque |
 | `README.md.save` envoyé sur GitHub | sauvegarde nano interrompue | `git rm` |
 | `schema --system` valide malgré l'erreur | il vérifie la configuration déjà traitée (vide) | `--config-file /var/lib/cloud/instance/user-data.txt` |
+| `Permission denied` sur `user-data.txt` | ce fichier de Cloud-Init n'est lisible que par `root` | ajouter `sudo` devant la commande |
+| Preuve en double dans un fichier | `tee -a` ajoute à chaque exécution | `grep -c` pour vérifier, puis suppression de la copie |
+| Disque d'une VM de 8,3 Go (`db01`) | l'installation de MariaDB agrandit le disque | surveiller `df -h` avant chaque VM |

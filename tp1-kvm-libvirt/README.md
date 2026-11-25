@@ -175,3 +175,19 @@ Je choisis un clone quand je veux tester vite sur une copie indépendante et iso
 
 ![10-formats](captures/10-formats.png)
 
+
+## Remarques
+
+**Système utilisé.** Le TP a été réalisé sur Ubuntu 24.04 (hôte sous VMware, avec KVM/QEMU/libvirt et le réseau NAT `default`). Le sujet autorise Ubuntu ou Rocky Linux : aucune VM Rocky n'a été créée.
+
+**Organisation du dossier.** Les dossiers `iso/`, `images/` et `templates/` existent pour respecter la structure demandée, mais ils ne contiennent qu'un fichier `.gitkeep` : les ISO et les disques `.qcow2` pèsent plusieurs Go et ne sont pas publiés. Les fichiers réels se trouvent dans `/var/lib/libvirt/images/` sur la machine. Les dossiers `captures/` et `preuves/` regroupent les captures d'écran et les sorties de commandes qui justifient chaque étape.
+
+**Scripts (`script/`).** Les cinq scripts sont écrits à partir de l'historique réel des commandes tapées pendant le TP ; `env.sh` contient les variables communes (noms des VM, chemins des disques).
+
+- `01_install_kvm.sh` : vérification de la virtualisation et installation de KVM/libvirt. Il a été exécuté, sa sortie est dans `preuves/01-install-kvm.txt`.
+- `02_create_vm.sh` : équivalent en ligne de commande de la création de `ubuntu-vm01`. La VM a été créée à l'origine avec virt-manager ; ce script est une reconstruction à partir des paramètres de la VM (`dominfo`, `domblklist`) et n'a pas été relancé.
+- `03_clone_vm.sh`, `04_create_template.sh`, `05_deploy_vm.sh` : clonage, création du template `ubuntu-template-v1` et déploiement des instances `app01` et `app02` avec cloud-init. Ils documentent les commandes déjà exécutées au cours du TP.
+
+Les scripts 02 à 05 refusent de s'exécuter si la VM ou le disque existe déjà, afin de ne pas écraser les VM et les preuves du TP.
+
+**Lien avec le TP2.** Le template `ubuntu-template-v1` et la clé SSH du TP1 sont réutilisés par le TP2 (`tp2-cloud-init/`), qui automatise le déploiement avec cloud-init.

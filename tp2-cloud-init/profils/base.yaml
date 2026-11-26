@@ -1,0 +1,4 @@
+role: base
+service: none
+packages:
+  - python3

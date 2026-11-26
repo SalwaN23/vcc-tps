@@ -1,17 +1,18 @@
 #!/usr/bin/env bash
 # deploy.sh : lancer une VM de l'inventaire a partir du template et de son seed
-# Usage : ./scripts/deploy.sh vm_web
+# Usage : ./scripts/deploy.sh NOM [fichier_inventaire]
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 IMGDIR=/var/lib/libvirt/images
 TEMPLATE="$IMGDIR/ubuntu-template-v1.qcow2"
-TARGET="${1:?usage: ./scripts/deploy.sh vm_web ou vm_db ou vm_admin}"
+TARGET="${1:?usage: ./scripts/deploy.sh NOM [fichier_inventaire]}"
+INV="${2:-inventaire/vms.yaml}"
 
-INFO="$(python3 - "$ROOT" "$TARGET" <<'PY'
+INFO="$(python3 - "$ROOT/$INV" "$TARGET" <<'PY'
 import sys, yaml
-root, name = sys.argv[1], sys.argv[2]
-inv = yaml.safe_load(open(root + "/inventaire/vms.yaml"))
+path, name = sys.argv[1], sys.argv[2]
+inv = yaml.safe_load(open(path))
 for vm in inv["vms"]:
     if vm["name"] == name:
         print(vm["hostname"], vm["cpu"], vm["ram"])
@@ -26,10 +27,12 @@ DISK="$IMGDIR/$VM.qcow2"
 SEED="$IMGDIR/bd2c-seed-$HOST.iso"
 
 if sudo virsh -c qemu:///system dominfo "$VM" >/dev/null 2>&1; then
-  echo "La VM $VM existe deja : arret."; exit 1
+  echo "La VM $VM existe deja : arret."
+  exit 1
 fi
 if [ -e "$DISK" ]; then
-  echo "Le disque $DISK existe deja : arret."; exit 1
+  echo "Le disque $DISK existe deja : arret."
+  exit 1
 fi
 
 echo "== Deploiement de $VM : $CPU vCPU, $RAM Mo =="
@@ -51,4 +54,4 @@ for i in $(seq 1 24); do
   ADDR="$(sudo virsh -c qemu:///system domifaddr "$VM" --source lease | awk '/ipv4/ {print $4}')"
   [ -n "$ADDR" ] && break
 done
-echo "$VM : ${ADDR:-adresse non obtenue}"
+echo "$VM : ${ADDR:-adresse non obtenue (normal avec une adresse fixe)}"

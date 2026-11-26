@@ -1,0 +1,27 @@
+vms:
+  - name: tp3_web01
+    hostname: web01
+    username: etudiant
+    os: ubuntu
+    cpu: 2
+    ram: 1024
+    profile: base
+    ip: 192.168.122.101
+
+  - name: tp3_db01
+    hostname: db01
+    username: etudiant
+    os: ubuntu
+    cpu: 2
+    ram: 1024
+    profile: base
+    ip: 192.168.122.102
+
+  - name: tp3_s301
+    hostname: s301
+    username: etudiant
+    os: ubuntu
+    cpu: 2
+    ram: 1024
+    profile: base
+    ip: 192.168.122.103
